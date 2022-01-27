@@ -1,15 +1,12 @@
 package com.prithvy.demo.model;
 
 import lombok.Data;
-
-import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Document
 @Entity
 @Data
 @Component
@@ -17,8 +14,8 @@ public class AgriCollege {
 
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String collegename;
     private String district;
     private String details;
@@ -37,13 +34,13 @@ public class AgriCollege {
         super();
     }
 
-//    public long getId() {
-//        return id;
-//    }
-//
-//    public void setId(long id) {
-//        this.id = id;
-//    }
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getCollegename() {
         return collegename;

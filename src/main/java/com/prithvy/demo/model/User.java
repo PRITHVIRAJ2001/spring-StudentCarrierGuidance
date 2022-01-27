@@ -1,20 +1,17 @@
 package com.prithvy.demo.model;
 
 import lombok.Data;
-
-import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 
-//@Document
 @Entity
 @Data
 @Component
 public class User {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     private String Name;
     @Column(unique = true)
     private String email;
@@ -45,13 +42,13 @@ public class User {
         this.confirmpassword = confirmpassword;
     }
 
-//    public long getId() {
-//        return id;
-//    }
-//
-//    public void setId(long id) {
-//        this.id = id;
-//    }
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return Name;

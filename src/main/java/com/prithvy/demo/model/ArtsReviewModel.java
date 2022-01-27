@@ -1,13 +1,10 @@
 package com.prithvy.demo.model;
 
 import lombok.Data;
-
-import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 
-@Document
 @Entity
 @Data
 @Component

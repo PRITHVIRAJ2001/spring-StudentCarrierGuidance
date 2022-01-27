@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@Component
 public class CollegeExcelService {
     public CollegeExcelService() {
     }

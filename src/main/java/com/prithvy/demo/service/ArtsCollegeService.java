@@ -26,8 +26,7 @@ public class ArtsCollegeService {
     }
 
     public List<ArtsCollege> findAll() {
-        List<ArtsCollege> arts = repo.findAll();
-        return arts;
+        return (List<ArtsCollege>) repo.findAll();
     }
 
     public ArtsCollege findByCollegename(String collegename) {

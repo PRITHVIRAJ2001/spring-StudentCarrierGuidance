@@ -1,21 +1,18 @@
 package com.prithvy.demo.model;
 
 import lombok.Data;
-
-import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 
-@Document
 @Entity
 @Data
 @Component
 public class EngineeringReviewModel {
-//
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
-//    private Integer id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
 
     private Long collegeId;
@@ -25,13 +22,13 @@ public class EngineeringReviewModel {
     private String review;
 
 
-//    public Integer getId() {
-//        return  id;
-//    }
-//
-//    public void setId(Integer id) {
-//        this.id = id;
-//    }
+    public Long getId() {
+        return  id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getReview() {
         return review;
