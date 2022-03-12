@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 
@@ -14,8 +13,8 @@ import java.util.List;
 @Component
 public class CollegeTypesService {
 
-        @Autowired
-        CollegeTypesRepository repo;
+    @Autowired
+    CollegeTypesRepository repo;
 
 
     public CollegeTypesService(CollegeTypesRepository repo) {

@@ -6,15 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
 @Component
 public class ArtsCourseService {
 
-  @Autowired
-  ArtsCourseRepository repo;
+    @Autowired
+    ArtsCourseRepository repo;
 
     public ArtsCourseService(ArtsCourseRepository repo) {
         super();

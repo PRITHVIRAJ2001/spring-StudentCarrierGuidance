@@ -76,7 +76,7 @@ public class AgriCollege {
 
     @Override
     public String toString() {
-        return "AgriCollege [id="  + ", collegename=" + collegename + ", district=" + district + ", details="
+        return "AgriCollege [id=" + ", collegename=" + collegename + ", district=" + district + ", details="
                 + details + ", agriReviewModel=" + agriReviewModel + "]";
     }
 

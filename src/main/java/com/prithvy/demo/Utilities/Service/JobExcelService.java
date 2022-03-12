@@ -1,11 +1,11 @@
 package com.prithvy.demo.Utilities.Service;
 
 
+import com.prithvy.demo.Utilities.GeneralModel.Jobs;
 import com.prithvy.demo.Utilities.ModelUtils.JobExcelUtilities;
 import com.prithvy.demo.model.AgriJobs;
 import com.prithvy.demo.model.ArtsJobs;
 import com.prithvy.demo.model.EngineeringJobs;
-import com.prithvy.demo.Utilities.GeneralModel.Jobs;
 import com.prithvy.demo.model.MedicalJobs;
 import com.prithvy.demo.repository.AgriJobsRepository;
 import com.prithvy.demo.repository.ArtsJobsRepository;

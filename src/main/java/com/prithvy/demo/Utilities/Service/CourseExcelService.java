@@ -1,11 +1,11 @@
 package com.prithvy.demo.Utilities.Service;
 
 
+import com.prithvy.demo.Utilities.GeneralModel.Courses;
 import com.prithvy.demo.Utilities.ModelUtils.CoursesExcelUtilities;
 import com.prithvy.demo.model.AgriCourses;
 import com.prithvy.demo.model.ArtsCourses;
 import com.prithvy.demo.model.EngineeringCourses;
-import com.prithvy.demo.Utilities.GeneralModel.Courses;
 import com.prithvy.demo.model.MedicalCourses;
 import com.prithvy.demo.repository.AgriCoursesRepository;
 import com.prithvy.demo.repository.ArtsCourseRepository;
@@ -32,6 +32,7 @@ public class CourseExcelService {
 
     @Autowired
     public MedicalCoursesRepository medicalCoursesRepository;
+    public EngineeringCourseRepository engineeringCourseRepository;
 
     public CourseExcelService(ArtsCourseRepository artsCourseRepository, AgriCoursesRepository agriCoursesRepository, MedicalCoursesRepository medicalCoursesRepository, EngineeringCourseRepository engineeringCourseRepository) {
         this.artsCourseRepository = artsCourseRepository;
@@ -42,8 +43,6 @@ public class CourseExcelService {
 
     public CourseExcelService() {
     }
-
-    public EngineeringCourseRepository engineeringCourseRepository;
 
     public void store(MultipartFile file, int collegeCode) {
         if (collegeCode == 1) {
