@@ -34,7 +34,7 @@ public class User {
         District = district;
     }
 
-    public String getConfirmpassword() {
+    public String getConfirmpassword(String encode) {
         return confirmpassword;
     }
 
@@ -92,7 +92,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User [id="  + ", Name=" + Name + ", email=" + email + ", password=" + password + ", College="
+        return "User [id=" + ", Name=" + Name + ", email=" + email + ", password=" + password + ", College="
                 + College + ", District=" + District + "]";
     }
 

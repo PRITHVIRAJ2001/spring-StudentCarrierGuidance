@@ -1,18 +1,17 @@
 package com.prithvy.demo.Utilities.Service;
 
 
+import com.prithvy.demo.Utilities.GeneralModel.College;
 import com.prithvy.demo.Utilities.ModelUtils.CollegeExcelUtilities;
 import com.prithvy.demo.model.AgriCollege;
 import com.prithvy.demo.model.ArtsCollege;
 import com.prithvy.demo.model.EngineeringCollege;
-import com.prithvy.demo.Utilities.GeneralModel.College;
 import com.prithvy.demo.model.MedicalCollege;
 import com.prithvy.demo.repository.AgriCollegeRepository;
 import com.prithvy.demo.repository.ArtsCollegeRepository;
 import com.prithvy.demo.repository.EngineeringCollegeRepository;
 import com.prithvy.demo.repository.MedicalCollegeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,6 +21,15 @@ import java.util.List;
 
 @Service
 public class CollegeExcelService {
+    @Autowired
+    public ArtsCollegeRepository artsCollegeRepository;
+    @Autowired
+    public AgriCollegeRepository agriCollegeRepository;
+    @Autowired
+    public MedicalCollegeRepository medicalCollegeRepository;
+    @Autowired
+    public EngineeringCollegeRepository engineeringCollegeRepository;
+
     public CollegeExcelService() {
     }
 
@@ -31,18 +39,6 @@ public class CollegeExcelService {
         this.medicalCollegeRepository = medicalCollegeRepository;
         this.engineeringCollegeRepository = engineeringCollegeRepository;
     }
-
-    @Autowired
-    public ArtsCollegeRepository artsCollegeRepository;
-
-    @Autowired
-    public AgriCollegeRepository agriCollegeRepository;
-
-    @Autowired
-    public MedicalCollegeRepository medicalCollegeRepository;
-
-    @Autowired
-    public EngineeringCollegeRepository engineeringCollegeRepository;
 
     public void store(MultipartFile file, int collegeCode) {
         if (collegeCode == 1) {

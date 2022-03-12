@@ -23,15 +23,12 @@ public class EngineeringCollege {
     private List<EngineeringReviewModel> engineeringReviewModel = new ArrayList<>();
 
 
-    public EngineeringCollege(String collegename, String district, String details,
-                              List<EngineeringReviewModel> engineeringReviewModel) {
-        super();
+    public EngineeringCollege(String collegename, String district, String details, List<EngineeringReviewModel> engineeringReviewModel) {
         this.collegename = collegename;
         this.district = district;
         this.details = details;
         this.engineeringReviewModel = engineeringReviewModel;
     }
-
 
     public EngineeringCollege() {
         super();

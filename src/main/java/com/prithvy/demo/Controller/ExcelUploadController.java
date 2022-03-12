@@ -12,15 +12,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 public class ExcelUploadController {
-	
-	@Autowired
-	CollegeExcelService collegeExcelService;
-	
-	@Autowired
-	CourseExcelService courseExcelService;
-	
-	@Autowired
-	JobExcelService jobExcelService;
+
+    @Autowired
+    CollegeExcelService collegeExcelService;
+
+    @Autowired
+    CourseExcelService courseExcelService;
+
+    @Autowired
+    JobExcelService jobExcelService;
 
     public ExcelUploadController() {
     }
@@ -31,7 +31,7 @@ public class ExcelUploadController {
         this.jobExcelService = jobExcelService;
     }
 
-    @RequestMapping(value = "/uploadExcel/collegeExcel" , method = RequestMethod.POST)
+    @RequestMapping(value = "/uploadExcel/collegeExcel", method = RequestMethod.POST)
     public void uploadSingleCollegeExcelFile(@RequestParam("excelfile") MultipartFile uploadfile, @RequestParam int collegeId) {
         try {
             // save file data to MongoDB
@@ -41,7 +41,7 @@ public class ExcelUploadController {
         }
     }
 
-    @RequestMapping(value = "/uploadExcel/courseExcel",method = RequestMethod.POST)
+    @RequestMapping(value = "/uploadExcel/courseExcel", method = RequestMethod.POST)
     public void uploadSingleCourseExcelFile(@RequestParam("excelfile") MultipartFile uploadfile, @RequestParam int collegeId) {
         try {
             // save file data to MongoDB
@@ -51,7 +51,7 @@ public class ExcelUploadController {
         }
     }
 
-    @RequestMapping(value = "/uploadExcel/jobExcel",method = RequestMethod.POST)
+    @RequestMapping(value = "/uploadExcel/jobExcel", method = RequestMethod.POST)
     public void uploadSingleJobExcelFile(@RequestParam("excelfile") MultipartFile uploadfile, @RequestParam int collegeId) {
         try {
             // save file data to MongoDB
