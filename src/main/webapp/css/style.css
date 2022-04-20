@@ -348,3 +348,23 @@ left: 600px;
 top: 340px;
 
 }
+
+.alignmentCollege{
+font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+font-style: normal;
+font-weight: normal;
+font-size: 12px;
+line-height: 16px;
+
+align-items: center;
+text-align: center;
+}
+
+.rectCurveCollegeContainer{
+position: absolute;
+width: 1200.36px;
+height: 30.5px;
+left: 100.66px;
+top: absolute;
+background: #D1E8E4;
+}

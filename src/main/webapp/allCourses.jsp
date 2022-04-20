@@ -19,69 +19,55 @@
 	<div class="s1">
 <c:choose>
 <c:when test="${mode=='MODE_ARTS1' }">
-<
-			<form action="/artsCourseJobs" method="post">
-		
+    	<form action="/artsCourseJobs" method="post">
+        <div class = "rectcurve alignlets btn btn-blue rounded-full py-3 px-6..." >
 		Enter College Name:
 		<select id="course" name="course" class="chosen">
 			<c:forEach var="ArtsCourses" items="${ ArtsCourses}">
 				<option value="${ArtsCourses.course }">${ArtsCourses.course }</option>
 			</c:forEach>
 		</select>
-		 
 		<input type="submit" value="VIEW JOBS">
+		</div>
 		</form>
-		
-	
-		
-	</c:when>	
-	
+</c:when>
 <c:when test="${mode=='MODE_ENG1' }">
-
-			<form action="/engCourseJobs" method="post">
-		
+	<form action="/engCourseJobs" method="post">
+    <div class = "rectcurve alignlets btn btn-blue rounded-full py-3 px-6..." >
 		Enter College Name:
 		<select id="course" name="course" class="chosen">
 			<c:forEach var="EngCourses" items="${ EngCourses}">
 				<option value="${EngCourses.course }">${EngCourses.course }</option>
 			</c:forEach>
 		</select>
-		 
 		<input type="submit" value="VIEW JOBS">
-		</form>
-		
-	
-		</c:when>
+	</div>
+	</form>
+</c:when>
 <c:when test="${mode=='MODE_AGRI1' }">
-
-			<form action="/agriCourseJobs" method="post">
-
+	<form action="/agriCourseJobs" method="post">
+	<div class = "rectcurve alignlets btn btn-blue rounded-full py-3 px-6..." >
 		Enter College Name: <select id="course" name="course" class="chosen">
 			<c:forEach var="AgriCourses" items="${ AgriCourses}">
 				<option value="${AgriCourses.course }">${AgriCourses.course }</option>
 			</c:forEach>
 		</select> <input type="submit" value="VIEW JOBS">
-	</form>
-
-		
-		</c:when>
+    </div>
+    </form>
+</c:when>
 <c:when test="${mode=='MODE_MEDICAL1' }">
-
-			<form action="/medicalCourseJobs" method="post">
-		
+		<form action="/medicalCourseJobs" method="post">
+		 <div class = "rectcurve alignlets btn btn-blue rounded-full py-3 px-6..." >
 		Enter College Name:
 		<select id="course" name="course" class="chosen">
 			<c:forEach var="MedicalCourses" items="${ MedicalCourses}">
 				<option value="${MedicalCourses.course }">${MedicalCourses.course }</option>
 			</c:forEach>
 		</select>
-		 
 		<input type="submit" value="VIEW JOBS">
+		</div>
 		</form>
-		
-		
 </c:when>
-
 </c:choose>
 </div>
 <jsp:include page="footer.jsp"/>
