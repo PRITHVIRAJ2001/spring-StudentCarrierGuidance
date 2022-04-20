@@ -22,12 +22,15 @@
 	<input type="submit" value="SUBMIT">
 	</form>
 	<c:forEach var="eng" items="${ eng}">
+	<div class = "rectCurveCollegeContainer alignmentCollege btn btn-blue rounded-full py-3 px-6..." >
 	<h3>${eng.collegename }</h3>
 	<h3>${eng.district }</h3>
 	<h3><a href=" ${eng.details }">${eng.details}</a></h3>
+	</div>
 	<br>
 	<br>
 	</c:forEach>
+
 	<form method="post" action="/engineering">
 	<input type="submit" value="Get all colleges">
 	</form>
@@ -45,9 +48,11 @@
 	</form>
 
 	<c:forEach var="med" items="${ med}">
+    <div class = "rectCurveCollegeContainer alignmentCollege btn btn-blue rounded-full py-3 px-6..." >
 	<h3>${med.collegename }</h3>
 	<h3>${med.district }</h3>
 	<h3><a href="${med.details }">Details</a></h3>
+	</div>
 	<br>
 	<br>
 	</c:forEach>
@@ -67,9 +72,11 @@
 	<input type="submit" value="SUBMIT">
 	</form>
 	<c:forEach var="agri" items="${ agri}">
+    <div class = "rectCurveCollegeContainer alignmentCollege btn btn-blue rounded-full py-3 px-6..." >
 	<h3>${agri.collegename }</h3>
 	<h3>${agri.district }</h3>
 	<h3><a href="${agri.details }">details</a></h3>
+	</div>
 	<br>
 	<br>
 	</c:forEach>
@@ -88,10 +95,11 @@
 	<input type="submit" value="SUBMIT">
 	</form>
 	<c:forEach var="arts" items="${ arts}">
-			
+    <div class = "rectCurveCollegeContainer alignmentCollege btn btn-blue rounded-full py-3 px-6..." >
 	<h3>${arts.collegename }</h3>
 	<h3>${arts.district }</h3>
 	<h3><a href="${arts.details }">Details</a></h3>
+	</div>
 	<br>
 	<br>
 	</c:forEach>
