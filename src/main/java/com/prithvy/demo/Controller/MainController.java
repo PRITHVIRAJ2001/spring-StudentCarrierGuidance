@@ -7,6 +7,7 @@ import com.prithvy.demo.model.*;
 import com.prithvy.demo.service.*;
 import com.prithvy.demo.service.Security.UserServiceSecurity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -154,6 +155,11 @@ public class MainController {
         this.jobExcelService = jobExcelService;
     }
 
+    @Bean
+    public void setToken() {
+        tokenClass.setToken("");
+    }
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home(HttpServletRequest request) {
         request.setAttribute("mode", "MODE_HOME");
@@ -161,8 +167,14 @@ public class MainController {
     }
 
     @RequestMapping(value = "/review", method = RequestMethod.GET)
-    public String reviews() {
-        return "review.jsp";
+    public String reviews(HttpServletRequest request, ModelMap modelMap) {
+        if (!Objects.equals(tokenClass.getToken(), "")) {
+            System.out.println("Inside already logged in");
+            request.setAttribute("mode", "MODE_HOME");
+            modelMap.put("types", collegeTypesService.findAll());
+            return "collegetypes.jsp";
+        } else
+            return "review.jsp";
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
@@ -217,7 +229,7 @@ public class MainController {
 
     @RequestMapping(value = "/collegetypes", method = RequestMethod.GET)
     public String collegetypes(ModelMap modelMap) {
-        if (!Objects.equals(token, "")) {
+        if (!Objects.equals(tokenClass.getToken(), "")) {
             modelMap.put("types", collegeTypesService.findAll());
             return "collegetypes.jsp";
         } else return "token not generated";
@@ -226,18 +238,23 @@ public class MainController {
     @Autowired
     UserServiceSecurity userServiceSecurity;
 
-    public String token = "";
+    @Autowired
+    TokenClass tokenClass;
+
 
     @RequestMapping(value = "/login-user", method = RequestMethod.POST)
     public String loginUser(@ModelAttribute User user, HttpServletRequest request, ModelMap modelMap) {
+        if (tokenClass.getToken().equals("") || tokenClass.getToken() == null) {
+            tokenClass.setToken(String.valueOf(UUID.randomUUID()));
+        }
         UserDetails userDetails = userServiceSecurity.loadUserByUsername(user.getEmail());
         System.out.println("USER DETAILS : " + userDetails.toString());
         user.setPassword(userDetails.getPassword());
         System.out.println("USER LOGIN DETAILS" + user.toString());
+        System.out.println(tokenClass.getToken());
         if (userService.findByEmailAndPassword(user.getEmail(), user.getPassword()) != null) {
             request.setAttribute("mode", "MODE_HOME");
             modelMap.put("types", collegeTypesService.findAll());
-            token = String.valueOf(UUID.randomUUID());
             return "collegetypes.jsp";
         } else {
             request.setAttribute("error", "Invalid Username or Password");
@@ -327,7 +344,7 @@ public class MainController {
 
     @RequestMapping("/engineeringcollegeReviewHome")
     public String showEng_Home(ModelMap modelMap, HttpServletRequest request) {
-        if (!Objects.equals(token, "")) {
+        if (!Objects.equals(tokenClass.getToken(), "")) {
             request.setAttribute("mode", "MODE_ENG1");
             modelMap.put("Ecol", engineeringCollegeService.findAll());
             return "homeReview.jsp";
@@ -336,7 +353,7 @@ public class MainController {
 
     @RequestMapping("/EngineeringSaveReview")
     public String showEng_SaveReview(HttpServletRequest request) {
-        if (!Objects.equals(token, "")) {
+        if (!Objects.equals(tokenClass.getToken(), "")) {
             request.setAttribute("mode", "MODE_ENG1");
             return "SaveReview.jsp";
         } else return "token not generated";
@@ -344,7 +361,7 @@ public class MainController {
 
     @RequestMapping("/addReviewForEngineeringCollege")
     public String addEngineeringReview(@RequestParam("collegename") String collegename, HttpServletRequest request) {
-        if (!Objects.equals(token, "")) {
+        if (!Objects.equals(tokenClass.getToken(), "")) {
             request.setAttribute("mode", "MODE_ENG1");
             engineeringCollege = engineeringCollegeService.findByCollegename(collegename);
             System.out.println(engineeringCollege.getId());
@@ -354,7 +371,7 @@ public class MainController {
 
     @RequestMapping("/showReviewForEngineeringCollege")
     public String showEngineeringCollegeReview(HttpServletRequest request, @ModelAttribute EngineeringReviewModel engineeringReviewModel, @ModelAttribute EngineeringCollege engineeringCollege, @RequestParam("collegename") String collegename, ModelMap modelMap) {
-        if (!Objects.equals(token, "")) {
+        if (!Objects.equals(tokenClass.getToken(), "")) {
             request.setAttribute("mode", "MODE_ENG1");
             engineeringCollege = engineeringCollegeService.findByCollegename(collegename);
             Long id = engineeringCollege.getId();
@@ -365,7 +382,7 @@ public class MainController {
 
     @RequestMapping("/save-EngineeringReview")
     public String saveEngineeringReview(HttpServletRequest request, @ModelAttribute EngineeringReviewModel engineeringReviewModel, ModelMap modelMap) {
-        if (!Objects.equals(token, "")) {
+        if (!Objects.equals(tokenClass.getToken(), "")) {
             request.setAttribute("mode", "MODE_ENG1");
             engineeringReviewModel.setCollegeId(engineeringCollege.getId());
             engineeringReviewModelService.saveMyReview(engineeringReviewModel);
@@ -375,7 +392,7 @@ public class MainController {
 
     @RequestMapping("/EngineeringShowReview")
     public String showEngineeringReview(HttpServletRequest request) {
-        if (!Objects.equals(token, "")) {
+        if (!Objects.equals(tokenClass.getToken(), "")) {
             request.setAttribute("mode", "MODE_ENG1");
             return "ShowReview.jsp";
         } else return "token not generated";
@@ -384,7 +401,7 @@ public class MainController {
 
     @RequestMapping("/agricollegeReviewHome")
     public String showAgri_Home(ModelMap modelMap, HttpServletRequest request) {
-        if (!Objects.equals(token, "")) {
+        if (!Objects.equals(tokenClass.getToken(), "")) {
             request.setAttribute("mode", "MODE_AGRI1");
             modelMap.put("Agricol", agriCollegeService.findAll());
             return "homeReview.jsp";
@@ -393,7 +410,7 @@ public class MainController {
 
     @RequestMapping("/AgriSaveReview")
     public String showAgri_SaveReview(HttpServletRequest request) {
-        if (!Objects.equals(token, "")) {
+        if (!Objects.equals(tokenClass.getToken(), "")) {
             request.setAttribute("mode", "MODE_AGRI1");
             return "SaveReview.jsp";
         } else return "token not generated";
@@ -401,7 +418,7 @@ public class MainController {
 
     @RequestMapping("/addReviewForAgriCollege")
     public String addAgriReview(@RequestParam("collegename") String collegename, HttpServletRequest request) {
-        if (!Objects.equals(token, "")) {
+        if (!Objects.equals(tokenClass.getToken(), "")) {
             request.setAttribute("mode", "MODE_AGRI1");
             agriCollege = agriCollegeService.findByCollegename(collegename);
             return "SaveReview.jsp";
@@ -410,7 +427,7 @@ public class MainController {
 
     @RequestMapping("/showReviewForAgriCollege")
     public String showAgriCollegeReview(HttpServletRequest request, @ModelAttribute AgriReviewModel agriReviewModel, @ModelAttribute AgriCollege agriCollege, @RequestParam("collegename") String collegename, ModelMap modelMap) {
-        if (!Objects.equals(token, "")) {
+        if (!Objects.equals(tokenClass.getToken(), "")) {
             request.setAttribute("mode", "MODE_AGRI1");
             agriCollege = agriCollegeService.findByCollegename(collegename);
             Long id = agriCollege.getId();
@@ -421,7 +438,7 @@ public class MainController {
 
     @RequestMapping("/save-AgriReview")
     public String saveAgriReview(HttpServletRequest request, @ModelAttribute AgriReviewModel agriReviewModel, ModelMap modelMap) {
-        if (!Objects.equals(token, "")) {
+        if (!Objects.equals(tokenClass.getToken(), "")) {
             request.setAttribute("mode", "MODE_AGRI1");
             agriReviewModel.setCollegeId(agriCollege.getId());
             agriReviewService.saveMyReview(agriReviewModel);
@@ -431,7 +448,7 @@ public class MainController {
 
     @RequestMapping("/AgriShowReview")
     public String showAgriReview(HttpServletRequest request) {
-        if (!Objects.equals(token, "")) {
+        if (!Objects.equals(tokenClass.getToken(), "")) {
             request.setAttribute("mode", "MODE_AGRI1");
             return "ShowReview.jsp";
         } else return "token not generated";
@@ -440,7 +457,7 @@ public class MainController {
 
     @RequestMapping("/artscollegeReviewHome")
     public String showArts_Home(ModelMap modelMap, HttpServletRequest request) {
-        if (!Objects.equals(token, "")) {
+        if (!Objects.equals(tokenClass.getToken(), "")) {
             request.setAttribute("mode", "MODE_ARTS1");
             modelMap.put("Artscol", artsCollegeService.findAll());
             return "homeReview.jsp";
@@ -449,7 +466,7 @@ public class MainController {
 
     @RequestMapping("/ArtsSaveReview")
     public String showArts_SaveReview(HttpServletRequest request) {
-        if (!Objects.equals(token, "")) {
+        if (!Objects.equals(tokenClass.getToken(), "")) {
             request.setAttribute("mode", "MODE_ARTS1");
             return "SaveReview.jsp";
         } else return "token not generated";
@@ -457,7 +474,7 @@ public class MainController {
 
     @RequestMapping("/addReviewForArtsCollege")
     public String addArtsReview(HttpServletRequest request, @RequestParam("collegename") String collegename) {
-        if (!Objects.equals(token, "")) {
+        if (!Objects.equals(tokenClass.getToken(), "")) {
             request.setAttribute("mode", "MODE_ARTS1");
             artsCollege = artsCollegeService.findByCollegename(collegename);
             System.out.println(artsCollege.getId());
@@ -467,7 +484,7 @@ public class MainController {
 
     @RequestMapping("/showReviewForArtsCollege")
     public String showArtsCollegeReview(HttpServletRequest request, @ModelAttribute ArtsReviewModel artsReviewModel, @ModelAttribute ArtsCollege artsCollege, @RequestParam("collegename") String collegename, ModelMap modelMap) {
-        if (!Objects.equals(token, "")) {
+        if (!Objects.equals(tokenClass.getToken(), "")) {
             request.setAttribute("mode", "MODE_ARTS1");
             artsCollege = artsCollegeService.findByCollegename(collegename);
             Long id = artsCollege.getId();
@@ -478,7 +495,7 @@ public class MainController {
 
     @RequestMapping("/save-ArtsReview")
     public String saveArtsReview(HttpServletRequest request, @ModelAttribute ArtsReviewModel artsReviewModel, ModelMap modelMap) {
-        if (!Objects.equals(token, "")) {
+        if (!Objects.equals(tokenClass.getToken(), "")) {
             request.setAttribute("mode", "MODE_ARTS1");
             artsReviewModel.setCollegeId(artsCollege.getId());
             artsReviewService.saveMyReview(artsReviewModel);
@@ -488,7 +505,7 @@ public class MainController {
 
     @RequestMapping("/ArtsShowReview")
     public String showArtsReview(HttpServletRequest request) {
-        if (!Objects.equals(token, "")) {
+        if (!Objects.equals(tokenClass.getToken(), "")) {
             request.setAttribute("mode", "MODE_ARTS1");
             return "ShowReview.jsp";
         } else return "token not generated";
@@ -497,7 +514,7 @@ public class MainController {
 
     @RequestMapping("/medicalcollegeReviewHome")
     public String showMedical_Home(ModelMap modelMap, HttpServletRequest request) {
-        if (!Objects.equals(token, "")) {
+        if (!Objects.equals(tokenClass.getToken(), "")) {
             request.setAttribute("mode", "MODE_MEDICAL1");
             modelMap.put("Medicol", medicalCollegeService.findAll());
             return "homeReview.jsp";
@@ -506,7 +523,7 @@ public class MainController {
 
     @RequestMapping("/MedicalSaveReview")
     public String showMedical_SaveReview(HttpServletRequest request) {
-        if (!Objects.equals(token, "")) {
+        if (!Objects.equals(tokenClass.getToken(), "")) {
             request.setAttribute("mode", "MODE_MEDICAL1");
             return "SaveReview.jsp";
         } else return "token not generated";
@@ -514,7 +531,7 @@ public class MainController {
 
     @RequestMapping("/addReviewForMedicalCollege")
     public String addMedicalReview(HttpServletRequest request, @RequestParam("collegename") String collegename) {
-        if (!Objects.equals(token, "")) {
+        if (!Objects.equals(tokenClass.getToken(), "")) {
             request.setAttribute("mode", "MODE_MEDICAL1");
             medicalCollege = medicalCollegeService.findByCollegename(collegename);
             System.out.println(medicalCollege.getId());
@@ -524,7 +541,7 @@ public class MainController {
 
     @RequestMapping("/showReviewForMedicalCollege")
     public String showMedicalCollegeReview(HttpServletRequest request, @ModelAttribute MedicalReviewModel medicalReviewModel, @ModelAttribute MedicalCollege medicalCollege, @RequestParam("collegename") String collegename, ModelMap modelMap) {
-        if (!Objects.equals(token, "")) {
+        if (!Objects.equals(tokenClass.getToken(), "")) {
             request.setAttribute("mode", "MODE_MEDICAL1");
             medicalCollege = medicalCollegeService.findByCollegename(collegename);
             Long id = medicalCollege.getId();
@@ -535,7 +552,7 @@ public class MainController {
 
     @RequestMapping("/save-medicalReview")
     public String saveMedicalReview(HttpServletRequest request, @ModelAttribute MedicalReviewModel medicalReviewModel, ModelMap modelMap) {
-        if (!Objects.equals(token, "")) {
+        if (!Objects.equals(tokenClass.getToken(), "")) {
             request.setAttribute("mode", "MODE_MEDICAL1");
             medicalReviewModel.setCollegeId(medicalCollege.getId());
             medicalReviewService.saveMyReview(medicalReviewModel);
@@ -545,7 +562,7 @@ public class MainController {
 
     @RequestMapping("/MedicalShowReview")
     public String showMedicalReview(HttpServletRequest request) {
-        if (!Objects.equals(token, "")) {
+        if (!Objects.equals(tokenClass.getToken(), "")) {
             request.setAttribute("mode", "MODE_MEDICAL1");
             return "ShowReview.jsp";
         } else return "token not generated";
