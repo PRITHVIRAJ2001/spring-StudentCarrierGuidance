@@ -24,6 +24,7 @@ import java.util.UUID;
 
 @Controller
 @Component("com.prithvy.demo.Controller.MainController")
+
 public class MainController {
 
     @Autowired

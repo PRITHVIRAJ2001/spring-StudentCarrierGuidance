@@ -11,19 +11,23 @@
 <body>
 <jsp:include page="header.jsp"/>
 <div class="s1">
-Hello
+
 
 <c:choose>
 <c:when test="${mode== 'MODE_ENG' }">
 <c:forEach var="engJob" items="${ engJob }">
+		<div class="container rounded-t-lg bg-blue-100 text-center border-solid border-2 border-double border-Slate-400">
 		<h3>${engJob.job }</h3>
+		</div>
 </c:forEach>
 </c:when>
 
 
 <c:when test="${mode== 'MODE_ARTS' }">
 <c:forEach var="artsJob" items="${ artsJob }">
+		<div class="container rounded-t-lg bg-blue-100 text-center border-solid border-2 border-double border-Slate-400">
 		<h3>${artsJob.job }</h3>
+		</div>
 </c:forEach>
 </c:when>
 
