@@ -32,6 +32,8 @@ public class CourseExcelService {
 
     @Autowired
     public MedicalCoursesRepository medicalCoursesRepository;
+
+    @Autowired
     public EngineeringCourseRepository engineeringCourseRepository;
 
     public CourseExcelService(ArtsCourseRepository artsCourseRepository, AgriCoursesRepository agriCoursesRepository, MedicalCoursesRepository medicalCoursesRepository, EngineeringCourseRepository engineeringCourseRepository) {
@@ -44,7 +46,8 @@ public class CourseExcelService {
     public CourseExcelService() {
     }
 
-    public void store(MultipartFile file, int collegeCode) {
+    public void store(MultipartFile file, int collegeCode) throws IOException {
+        System.out.println(file.getInputStream()+"blablabla");
         if (collegeCode == 1) {
             try {
                 List<Courses> lstCustomers = CoursesExcelUtilities.parseExcelFile(file.getInputStream());
@@ -54,9 +57,12 @@ public class CourseExcelService {
                     engineeringCourses.setCourse(courses.getCourse());
                     engineeringCourses.setId(courses.getId());
                     engineeringCourses.setCollegeTypeId(courses.getCollegeTypeId());
+                    System.out.println(engineeringCourses.toString()+"eCourse");
                     lst.add(engineeringCourses);
+//                    engineeringCourseRepository.save(engineeringCourses);
                 }
-                // Save Customers to DataBase
+                System.out.println(lst+"lst lst lst");
+//                 Save Customers to DataBase
                 engineeringCourseRepository.saveAll(lst);
             } catch (IOException e) {
                 throw new RuntimeException("FAIL! -> message = " + e.getMessage());

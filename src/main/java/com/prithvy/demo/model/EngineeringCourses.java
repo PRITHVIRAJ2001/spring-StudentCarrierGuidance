@@ -52,13 +52,5 @@ public class EngineeringCourses {
         this.course = course;
     }
 
-    @Override
-    public String toString() {
-        return "Engineering_Courses [id=" + id + ", CollegeTypeId=" + CollegeTypeId + ", course=" + course
-                + ", getId()=" + getId() + ", getCollegeTypeId()=" + getCollegeTypeId() + ", getCourse()=" + getCourse()
-                + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
-                + "]";
-    }
-
 
 }
