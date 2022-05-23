@@ -17,9 +17,11 @@
 <body>
 	<jsp:include page="header.jsp"/>
 	<div class="s1">
+	<br><br><br>
 <c:choose>
 <c:when test="${mode=='MODE_ARTS1' }">
     	<form action="/artsCourseJobs" method="post">
+    	
         <div class = "rectcurve alignlets btn btn-blue rounded-full py-3 px-6..." >
 		Enter College Name:
 		<select id="course" name="course" class="chosen">
@@ -33,6 +35,7 @@
 </c:when>
 <c:when test="${mode=='MODE_ENG1' }">
 	<form action="/engCourseJobs" method="post">
+	
     <div class = "rectcurve alignlets btn btn-blue rounded-full py-3 px-6..." >
 		Enter College Name:
 		<select id="course" name="course" class="chosen">
@@ -46,6 +49,7 @@
 </c:when>
 <c:when test="${mode=='MODE_AGRI1' }">
 	<form action="/agriCourseJobs" method="post">
+	
 	<div class = "rectcurve alignlets btn btn-blue rounded-full py-3 px-6..." >
 		Enter College Name: <select id="course" name="course" class="chosen">
 			<c:forEach var="AgriCourses" items="${ AgriCourses}">
@@ -57,6 +61,7 @@
 </c:when>
 <c:when test="${mode=='MODE_MEDICAL1' }">
 		<form action="/medicalCourseJobs" method="post">
+		
 		 <div class = "rectcurve alignlets btn btn-blue rounded-full py-3 px-6..." >
 		Enter College Name:
 		<select id="course" name="course" class="chosen">
@@ -69,9 +74,9 @@
 		</form>
 </c:when>
 </c:choose>
+
 </div>
 <jsp:include page="footer.jsp"/>
-  
 </body>
 <script type="text/javascript">
 $(".chosen").chosen();

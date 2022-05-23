@@ -1,9 +1,11 @@
 package com.prithvy.demo.Utilities.ModelUtils;
 
 import com.prithvy.demo.Utilities.GeneralModel.Courses;
+import com.prithvy.demo.repository.EngineeringCourseRepository;
 import lombok.Data;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,7 +27,7 @@ public class CoursesExcelUtilities {
         try (Workbook workbook = new XSSFWorkbook(); ByteArrayOutputStream out = new ByteArrayOutputStream();) {
             CreationHelper createHelper = workbook.getCreationHelper();
 
-            Sheet sheet = workbook.createSheet("Courses");
+            Sheet sheet = workbook.createSheet("Course");
 
             Font headerFont = workbook.createFont();
             headerFont.setBold(true);
@@ -58,11 +60,14 @@ public class CoursesExcelUtilities {
         }
     }
 
+    @Autowired
+    EngineeringCourseRepository engineeringCourseRepository;
+
     public static List<Courses> parseExcelFile(InputStream is) {
         try {
             Workbook workbook = new XSSFWorkbook(is);
 
-            Sheet sheet = workbook.getSheet("Courses");
+            Sheet sheet = workbook.getSheet("Sheet1");
             Iterator<Row> rows = sheet.iterator();
 
             List<Courses> lstCustomers = new ArrayList<>();
@@ -98,7 +103,7 @@ public class CoursesExcelUtilities {
 
                 lstCustomers.add(cust);
             }
-
+            System.out.println("ssssssss"+lstCustomers.toString());
             // Close WorkBook
             workbook.close();
 
