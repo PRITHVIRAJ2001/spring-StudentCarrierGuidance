@@ -72,7 +72,7 @@ public class CollegeExcelUtilities {
         try {
             Workbook workbook = new XSSFWorkbook(is);
 
-            Sheet sheet = workbook.getSheet("Colleges");
+            Sheet sheet = workbook.getSheet("Sheet1");
             Iterator<Row> rows = sheet.iterator();
 
             List<College> lstCustomers = new ArrayList<>();

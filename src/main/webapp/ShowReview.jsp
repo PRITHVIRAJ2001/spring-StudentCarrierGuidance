@@ -8,6 +8,7 @@
 <meta charset="ISO-8859-1">
 <title>SHOW REVIEW</title>
 <link rel="stylesheet" href=/css/style.css">
+  <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
 <jsp:include page="header.jsp"/>
@@ -16,8 +17,11 @@
 <c:when test="${mode=='MODE_ENG1'}">
 <h1>Engineering College Reviews</h1>
 		<c:forEach var="Emod" items="${ Emod}">
-			
-	<h3>${Emod.review }</h3>
+		<div class="container mx-auto bg-blue-200 rounded-3xl">
+	       <br>
+	       <div class="container bg-yellow-200  mx-auto text-center  rounded-3xl w-80"><h3>${Emod.review }</h3></div>
+	       <br>
+	    </div>
 	
 	<br>
 	<br>
@@ -27,8 +31,11 @@
 <c:when test="${mode=='MODE_ARTS1'}">
 <h1>Arts College Reviews</h1>
 		<c:forEach var="Artscol" items="${ Artscol}">
-			
-	<h3>${Artscol.review }</h3>
+			<div class="container mx-auto bg-blue-200 rounded-3xl">
+            	   <br>
+	                <div class="container bg-yellow-200  mx-auto text-center  rounded-3xl w-80"><h3>${Artscol.review }</h3></div>
+	               <br>
+	        </br>
 	
 	<br>
 	<br>
@@ -37,9 +44,12 @@
 	
 <c:when test="${mode=='MODE_AGRI1'}">
 <h1>Agri College Reviews</h1>
-		<c:forEach var="Agrimod" items="${ Agricol}">
-			
-	<h3>${Agricol.review }</h3>
+		<c:forEach var="Agricol" items="${ Agricol}">
+	<div class="container mx-auto bg-blue-200 rounded-3xl">
+    	       <br>
+	 <div class="container bg-yellow-200  mx-auto text-center  rounded-3xl w-80"><h3>${Agricol.review }</h3></div>
+	<br>
+	</div>
 	
 	<br>
 	<br>
@@ -49,16 +59,16 @@
 <c:when test="${mode=='MODE_MEDICAL1'}">
 <h1>Medical College Reviews</h1>
 		<c:forEach var="Medicol" items="${ Medicol}">
-			
-	<h3>${Medicol.review }</h3>
+			<div class="container mx-auto bg-blue-200 rounded-3xl">
+            	       <br>
+	 <div class="container bg-yellow-200  mx-auto text-center  rounded-3xl w-80"><h3>${Medicol.review }</h3></div>
 	
 	<br>
-	<br>
+</div>
 		</c:forEach>
 	</c:when>	
 	</c:choose>
 	</div>
-<jsp:include page="footer.jsp"/>
   
 </body>
 </html>
